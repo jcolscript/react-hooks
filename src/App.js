@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [tech, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
+
+  useEffect(() => {
+    const techs = localStorage.getItem('techs');
+    setTech(JSON.parse(techs));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('techs', JSON.stringify(tech));
+  }, [tech]);
 
   function handleAdd() {
     setTech([...tech, newTech]);
